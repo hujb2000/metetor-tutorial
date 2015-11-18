@@ -124,3 +124,17 @@ Note:
    methods have been added to the app and displays teh appropriate  controls.
 
    Your can add the accounts-facebook package to enable Facebook login in your app, the Facebook button will automatically appear in the dropdown.
+
+10. Security with methods
+
+	The best way to do this is by declaring methods. Instead of the client code directory calling insert, update and remove,
+
+	Every newly created Meteor project has the insecure package added by default , This is the package that allows us to edit the database from the client
+
+	meteor remove insecure.
+
+	When you call a method on the client using Meteor.call, two things happen in parallel:
+
+	1. The client sends a request to the server to run the method in a secure environment, just line an AJAX request would work
+	2. A simulation of the method runs directly on the client to attempt to predict the outcome of the server call using the available information.
+
