@@ -138,3 +138,11 @@ Note:
 	1. The client sends a request to the server to run the method in a secure environment, just line an AJAX request would work
 	2. A simulation of the method runs directly on the client to attempt to predict the outcome of the server call using the available information.
 
+11. Filtering daa with publish and subscribe
+
+	meteor remove autopublish
+
+	When the app refreshes, the task list will be empty, Without the autopublish package, we wil have to specify explicitly what the server sends to the client. Thun function
+
+	in Meteor that do this are Meteor.publish and Meteor.subscribe
+
