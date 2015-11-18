@@ -31,3 +31,18 @@ meteor mongo
 
 		db.tasks.insert({ text: "Hello world!", createdAt: new Date() });
 
+
+4.  Adding tasks with a form
+
+
+Event listeners are added to templates in much the same way as helpers are : by calling Template.templanteName.events(...) with a dictionary.
+
+The keys describe the event to listen for , and the values are event handlers that are called whe the event  happens.
+
+In ourr case above, we are listening to the submit event on any  element that matches the CSS selector .new-task.  When this event is triggered by the user pressing enter inside the input filed.
+
+our event handler function is called.
+
+event.target.text.value. You can see all of the other properties of the event object by adding a console.log(event) and inspecting the object in your browser console.
+
+g
