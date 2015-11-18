@@ -51,3 +51,67 @@ Inside the event handlers, this refers to an individual task object.  In a colle
 
 We can get the _id of the current task with this._id. Once  we have the _id, we can use update and remove to modify the relevant task.
 
+6. Deploying your app
+
+meteor deploy hujb2000.meteor.com, fill the email: hujb2000@163.com , http://hujb2000.meteor.com
+
+7. Running on mobile
+
+   * Runing on an iOS
+
+   meteor install-sdk ios
+
+   [install-sdk ios](https://github.com/meteor/meteor/wiki/Mobile-Development-Install:-iOS-on-Mac)
+
+   meteor add-platform ios
+
+   meteor run ios
+
+	meteor run  ios-device
+
+	This will open Xcode with a project for your iOS app, Your can use Xcode to then launch the app on any device or simulator that Xcode supports.
+
+	meteor run ios-device --mobile-server hujb2000.meteor.com
+
+
+
+	* Runing on an android
+
+	meteor install-sdk android
+
+	[install-sdk android](https://github.com/meteor/meteor/wiki/Mobile-Development-Install:-Android-on-Mac)
+
+	meteor add-platform android
+
+	meteor run android
+
+	meteor run android-device
+
+	adb devices
+
+	The App will be built and installed on your device, If you want to point your app to the server you deployed in the previous step.run:
+
+	meteor run android-device --mobile-server hujb2000.meteor.com
+
+Note:
+
+		Starting with Meteor 1.2, the bundled Android tools have been removed and a system-wide install of the Android SDK is now required.
+
+		This should make it easier to keep the development toolchain up to date and helps avoid some difficult to diagnose failures.
+
+		 The meteor install-sdk command no longer attempts to download and install the Android tools for you (it has been deprecated and
+
+		 just points you to these instructions).
+
+ Note2:
+    Unfortunately, the Android Studio setup wizard only downloads the most recent SDK Platform(API 23), while Cordova requires API 22. That means
+
+     you'll have to install the Android SDK  Platform API 22 manually
+
+     Optionally: Settin ANDROID_HOME and adding the tools directories to your PATH
+
+
+8. Storing temporary UI state  in Session
+
+  Session is a convenient place to store temporary UI state, and can be used in helpers just like a collection.
+
