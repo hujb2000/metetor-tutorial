@@ -45,4 +45,9 @@ our event handler function is called.
 
 event.target.text.value. You can see all of the other properties of the event object by adding a console.log(event) and inspecting the object in your browser console.
 
-g
+5. Checking off and deleting tasks
+
+Inside the event handlers, this refers to an individual task object.  In a collection. every inserted document has a unique _id filed that can be used to refer to that specific document.
+
+We can get the _id of the current task with this._id. Once  we have the _id, we can use update and remove to modify the relevant task.
+
