@@ -3,52 +3,60 @@ Tasks  = new Mongo.Collection("tasks");
 if (Meteor.isClient) {
     // If hide completed is checked, filter tasks
     Template.body.helpers({
-        tasks:function(){
-            if(Session.get("hideCompleted")){
-                return Tasks.find({checked: {$ne:true}}, {sort:{createAt:-1}});
-            }else{
-                return Tasks.find({},{sort:{createAt:-1}});
+        tasks: function () {
+            if (Session.get("hideCompleted")) {
+                return Tasks.find({checked: {$ne: true}}, {sort: {createAt: -1}});
+            } else {
+                return Tasks.find({}, {sort: {createAt: -1}});
             }
         },
-        hideCompleted: function(){
+        hideCompleted: function () {
             return Session.get("hideCompleted");
         },
-        incompleteCount: function(){
-            return Tasks.find({checked:{$ne:true}}).count();
+        incompleteCount: function () {
+            return Tasks.find({checked: {$ne: true}}).count();
         }
     });
 
-  Template.body.events({
-    "submit .new-task": function(event){
-      // Prevent default browser form submit
-      event.preventDefault();
+    Template.body.events({
+        "submit .new-task": function (event) {
+            // Prevent default browser form submit
+            event.preventDefault();
 
-      // Get value from form element
-      var text = event.target.text.value;
+            // Get value from form element
+            var text = event.target.text.value;
 
-      //  Insert a task into the collection
-      Tasks.insert({text: text,createAt:new Date()}) // current time
+            //  Insert a task into the collection
+            Tasks.insert({
+                text: text,
+                createAt: new Date(), // current time
+                owner: Meteor.userId(), // _id of logged in user
+                username: Meteor.user().username  // username of logged in user
+            });
 
-      // Clear form
-      event.target.text.value = "";
-    },
+            // Clear form
+            event.target.text.value = "";
+        },
 
-    "click .toggle-checked": function(){
-      // Set the checked property to the opposite of its current value
-      Tasks.update( this._id, {
-        $set: {checked: !this.checked}
-      });
-    },
+        "click .toggle-checked": function () {
+            // Set the checked property to the opposite of its current value
+            Tasks.update(this._id, {
+                $set: {checked: !this.checked}
+            });
+        },
 
-    "click .delete": function(){
-      Tasks.remove(this._id);
-    },
+        "click .delete": function () {
+            Tasks.remove(this._id);
+        },
 
-    "change .hide-completed  input": function(event){
-       Session.set("hideCompleted", event.target.checked);
-    }
+        "change .hide-completed  input": function (event) {
+            Session.set("hideCompleted", event.target.checked);
+        }
+    });
 
-  });
+    Accounts.ui.config({
+        passwordSignupFields: "USERNAME_ONLY"
+    });
 }
 
 if (Meteor.isServer) {

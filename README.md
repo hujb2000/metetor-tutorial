@@ -115,3 +115,12 @@ Note:
 
   Session is a convenient place to store temporary UI state, and can be used in helpers just like a collection.
 
+9. Adding user accounts
+
+   meteor add accounts-ui accounts-password
+
+   If your app has the accounts-ui package, all we have to do to add a login dropdown is  include loginButtons template with {{> loginButtons}}. This dropdown detects which login
+
+   methods have been added to the app and displays teh appropriate  controls.
+
+   Your can add the accounts-facebook package to enable Facebook login in your app, the Facebook button will automatically appear in the dropdown.
